@@ -1,0 +1,18 @@
+.address {
+    background-color: #0058fa;
+    border: 5px solid #ff0000;
+    padding: 25px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-family: Arial;
+    line-height: 1.5;
+}
+.posts {
+    background-color: #faab00;
+    border: 3px solid #ff0000;
+    padding: 25px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-family: Arial;
+    line-height: 1.5;
+}
