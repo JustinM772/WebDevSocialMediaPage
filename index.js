@@ -1,46 +1,59 @@
 async function displayUser() {
     const response = await fetch('https://jsonplaceholder.typicode.com/users');
     const data = await response.json();
-    const user = data[0];
-    const address = user.address;
-    const addressText = `
-        <p>Street: ${address.street}</p>
-        <p>Suite: ${address.suite}</p>
-        <p>City: ${address.city}</p>
-        <p>Zipcode: ${address.zipcode}</p>
-        <p>Geo: (Lat: ${address.geo.lat}, Lng: ${address.geo.lng})</p>
-    `;
-    document.getElementById('user').innerHTML += addressText.trim();
-    const response2 = await fetch('https://jsonplaceholder.typicode.com/posts')
-    const data2 = await response2.json()
-    let posts = ""
-    for (let i = 0; i < 5; i++) {
-        const post = data2[i]
-        const postText = `
-            <p>User ID: ${post.userId}</p>
-            <p>IT: ${post.it}</p>
-            <p>Title: ${post.title}</p>
-            <p>Body: ${post.body}</p>
-        `
-        posts += postText
+    const users = document.getElementById('user');
+
+    let userText = '';
+    for (let i = 0; i < 3; i++) {
+        const user = data[i];
+        userText += `<pre>${JSON.stringify(user, null, 2)}</pre>`;
     }
-    document.getElementById('post').innerHTML += posts.trim()
+    users.innerHTML += userText;
+    console.log(userText)
   }
-async function displayImage() {
-    const response = await fetch('dog.png')
-    const blob = await response.blob()
-    document.getElementById("picture").src = URL.createObjectURL(blob)
+async function displayPosts() {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const data = await response.json();
+    const posts = document.getElementById('post');
+
+    let postsText = '';
+    for (let i = 0; i < 5; i++) {
+        const post = data[i];
+        postsText += `<pre>${JSON.stringify(post, null, 2)}</pre>`;
+    }
+    posts.innerHTML += postsText;
+    console.log(postsText)
 }
-displayImage()
-.then(response => {
-    console.log('image displayed')
-})
-.catch(error => {
-    console.log('error')
-})
+async function displayComment() {
+    const response = await fetch('https://jsonplaceholder.typicode.com/comments');
+    const data = await response.json();
+    const comments = document.getElementById('comment');
+
+    let commentsText = '';
+    for (let i = 0; i < 3; i++) {
+        const comment = data[i];
+        commentsText += `<pre>${JSON.stringify(comment, null, 2)}</pre>`;
+    }
+    comments.innerHTML += commentsText;
+    console.log(commentsText)
+  }
 displayUser()
 .then (response => {
-    console.log("The user is displayed well.");
+    console.log("The users are displayed well.");
+})    
+.catch(error => {
+    console.log("There is an error here.");
+})
+displayPosts()
+.then (response => {
+    console.log("The posts are displayed well.");
+})    
+.catch(error => {
+    console.log("There is an error here.");
+})
+displayComment()
+.then (response => {
+    console.log("The comments are displayed well.");
 })    
 .catch(error => {
     console.log("There is an error here.");
